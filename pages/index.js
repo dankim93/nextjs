@@ -2,8 +2,13 @@ import Head from "next/head";
 import Layout, { siteTitle } from "../components/layout";
 import utilStyles from "../styles/utils.module.scss";
 import { getSortedPostsData } from "../lib/posts";
+import { addStudent } from "../redux/actions/studentActions";
 
-export default function Home({ allPostsData }) {
+import { connect } from "react-redux";
+
+function Home({ allPostsData, student, addStudent }) {
+  console.log({ student, addStudent });
+  const sampleStudent = { name: "dan", state: "CA" };
   return (
     <Layout home>
       <Head>
@@ -11,6 +16,7 @@ export default function Home({ allPostsData }) {
       </Head>
       <section className={utilStyles.headingMd}>
         <p>Hello world</p>
+        <button onClick={() => addStudent(sampleStudent)}>Add student</button>
         <p>
           <a href="https://google.com">go 2 google</a>
         </p>
@@ -33,6 +39,16 @@ export default function Home({ allPostsData }) {
     </Layout>
   );
 }
+
+const mapStateToProps = (state) => ({
+  student: state.student,
+});
+
+const mapDispatchToProps = {
+  addStudent: addStudent,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData();
