@@ -1,7 +1,7 @@
 import Head from "next/head";
-import Layout, { siteTitle } from "../components/layout";
-import utilStyles from "../styles/utils.module.scss";
-import { addStudent } from "../redux/actions/studentActions";
+import Layout, { siteTitle } from "../components/common/layout";
+import utilStyles from "../../styles/utils.module.scss";
+import { addStudent } from "../../redux/actions/studentActions";
 
 import { connect } from "react-redux";
 
@@ -24,7 +24,11 @@ function Home({ student, addStudent }) {
 
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
-        <ul className={utilStyles.list}></ul>
+        <ul className={utilStyles.list}>
+          {student.students.map((s, i) => (
+            <div key={i}>{s.name}</div>
+          ))}
+        </ul>
       </section>
     </Layout>
   );

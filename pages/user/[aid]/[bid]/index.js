@@ -6,5 +6,14 @@ export default function NumberPage() {
 
   console.log({ router });
 
-  return <div>Number index</div>;
+  return (
+    <div>
+      bid{" "}
+      {Object.keys(router.query).map((k) => (
+        <div key={k}>
+          {k}:{router.query[k]}
+        </div>
+      ))}
+    </div>
+  );
 }

@@ -6,5 +6,14 @@ export default function NumberPage() {
 
   console.log({ router });
 
-  return <div>id pg</div>;
+  return (
+    <div>
+      cid{" "}
+      {Object.keys(router.query).map((k) => (
+        <div key={k}>
+          {k}:{router.query[k]}
+        </div>
+      ))}
+    </div>
+  );
 }
